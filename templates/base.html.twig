@@ -1,17 +1,66 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+    {% block stylesheets %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {% endblock %}
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+    <noscript>
+        <link rel="stylesheet" href="{{ asset('assets/css/noscript.css') }}"/>
+    </noscript>
+</head>
+
+<body class="homepage is-preload">
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <div id="header">
+        <nav id="nav">
+            <ul>
+                <li><a href="/">Accueil</a></li>
+                <li>
+                    <a href="{{ path('app_course') }}">Courses</a>
+                    <ul>
+                        {# 1er sous-menu #}
+                        {{ render(controller(
+                            'App\\Controller\\CourseController::menu'
+                        )) }}
+                    </ul>
+                </li>
+                <li><a href="#">Se connecter</a></li>
+                <li><a href="#">S'inscrire</a></li>
+            </ul>
+        </nav>
+        <!-- Inner -->
+        <div class="inner">
+            <header>
+                <h1><a href="{{ path('app_home') }}" id="logo">Solirun</a></h1>
+                <hr/>
+                <p>Course caritative</p>
+            </header>
+            <footer>
+                <a href="#banner" class="button circled scrolly">Start</a>
+            </footer>
+        </div>
+    </div>
+
+    {% block body %}{% endblock %}
+
+</div>
+
+<!-- Scripts -->
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.dropotron.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.scrolly.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.scrollex.min.js') }}"></script>
+<script src="{{ asset('assets/js/browser.min.js') }}"></script>
+<script src="{{ asset('assets/js/breakpoints.min.js') }}"></script>
+<script src="{{ asset('assets/js/util.js') }}"></script>
+<script src="{{ asset('assets/js/main.js') }}"></script>
+
+</body>
 </html>

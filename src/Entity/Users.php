@@ -31,6 +31,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\ManyToOne(inversedBy: 'unUser')]
+    private ?Classe $classe = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,5 +107,17 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getClasse(): ?Classe
+    {
+        return $this->classe;
+    }
+
+    public function setClasse(?Classe $classe): static
+    {
+        $this->classe = $classe;
+
+        return $this;
     }
 }
